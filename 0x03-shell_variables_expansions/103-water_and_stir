@@ -1,2 +1,2 @@
 #!/bin/bash
-printf %s $(echo "ibase=5;$(echo $WATER | tr 'water' 01234)+ibase=5;$(echo $STIR | tr 'stir.' 01234)" | awk '{n=$1; b="bestchol"; r=""; while(n>0){r=substr(b,n%8+1,1) r; n=int(n/8)} print r}')
+awk -v w=$(echo "$WATER"|tr water 01234) -v s=$(echo "$STIR"|tr 'stir.' 01234) 'BEGIN{n=w+s b="bestchol" r="";while(n){r=substr(b,n%8+1,1)r;n=int(n/8)}print r}'
