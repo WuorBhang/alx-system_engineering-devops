@@ -1,2 +1,35 @@
 #!/bin/bash
-echo "obase=8; $(echo "$WATER" | tr 'water' '01234') + $(echo "$STIR" | tr 'stir.' '01234')" | bc | tr '0-7' 'bestchol'
+
+# Convert WATER from base 'water' to decimal
+water_val=0
+for c in $(echo "$WATER" | grep -o .); do
+  digit=$(echo "water" | grep -aob "$c" | grep -o '[0-9]')
+  water_val=$((water_val * 5 + digit))
+done
+
+# Convert STIR from base 'stir' to decimal
+stir_val=0
+for c in $(echo "$STIR" | grep -o .); do
+  case "$c" in
+    s) d=0 ;;
+    t) d=1 ;;
+    i) d=2 ;;
+    r) d=3 ;;
+    *) continue ;;
+  esac
+  stir_val=$((stir_val * 4 + d))
+done
+
+# Add
+sum=$((water_val + stir_val))
+
+# Convert to base-8 and map to bestchol
+result=""
+while [ $sum -gt 0 ]; do
+  digit=$((sum % 8))
+  char=$(echo "bestchol" | cut -c$((digit+1)))
+  result="$char$result"
+  sum=$((sum / 8))
+done
+
+echo "${result:-b}"
