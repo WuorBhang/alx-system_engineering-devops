@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "chelbtebshtbeolhcb" | cut -c1-9
+echo "chelbtebshtbeolhcb" | cut -c1-10
