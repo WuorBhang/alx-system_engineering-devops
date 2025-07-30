@@ -1,2 +1,5 @@
 #!/bin/bash
-echo "chelbteb"
+water_sum=$(echo $WATER | tr water 01234)
+stir_sum=$(echo $STIR | tr stir. 01234)
+total=$((5#$water_sum + 5#$stir_sum))
+printf "%o" $total | tr 01234567 bestchol
