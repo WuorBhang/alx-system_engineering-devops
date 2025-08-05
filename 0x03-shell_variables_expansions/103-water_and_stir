@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$(echo $(( $(echo "$WATER" | tr 'ewatr' '01234') + $(echo "$STIR" | tr 'tir.' '0123') )) | tr '01234567' 'chelbteb')"
+digits=shtbeolhc; n=$(( $(echo "$WATER" | tr 'ewatr' '01234') + $(echo "$STIR" | tr 'tir.' '0123') )); r=; while [ $n -gt 0 ]; do r=${digits:$(($n%8)):1}$r; n=$(($n/8)); done; echo ${r:-${digits:0:1}}
